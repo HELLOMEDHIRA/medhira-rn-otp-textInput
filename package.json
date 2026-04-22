@@ -1,0 +1,199 @@
+{
+  "name": "medhira-rn-otp-textinput",
+  "version": "0.0.1",
+  "description": "MEDHIRA - OTP/PIN text input component for React Native",
+  "source": "./src/index.tsx",
+  "main": "./lib/commonjs/index.js",
+  "module": "./lib/module/index.js",
+  "types": "./lib/typescript/commonjs/index.d.ts",
+  "files": [
+    "lib",
+    "android",
+    "ios",
+    "cpp",
+    "*.podspec",
+    "react-native.config.js",
+    "!ios/build",
+    "!android/build",
+    "!android/gradle",
+    "!android/gradlew",
+    "!android/gradlew.bat",
+    "!android/local.properties",
+    "!**/__tests__",
+    "!**/__fixtures__",
+    "!**/__mocks__",
+    "!**/.*"
+  ],
+  "scripts": {
+    "test": "jest",
+    "typecheck": "tsc",
+    "lint": "eslint \"**/*.{js,ts,tsx}\"",
+    "clean": "del-cli lib",
+    "prepare": "bob build && npm run postbuild",
+    "postbuild": "node minify.js",
+    "release": "release-it"
+  },
+  "keywords": [
+    "react-native",
+    "otp",
+    "pin",
+    "textinput",
+    "medhira"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HELLOMEDHIRA/medhira-rn-otp-textInput.git"
+  },
+  "contributors": [
+    "MEDHIRA"
+  ],
+  "author": "MEDHIRA <hello.medhira@gmail.com> (https://medhira.readthedocs.io/en/latest/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HELLOMEDHIRA/medhira-rn-otp-textInput/issues"
+  },
+  "homepage": "https://medhira-io.github.io/medhira-rn-otp-textInput",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "devDependencies": {
+    "@commitlint/config-conventional": "^20.5.0",
+    "@evilmartians/lefthook": "^2.1.6",
+    "@react-native/eslint-config": "^0.85.2",
+    "@release-it/conventional-changelog": "^10.0.6",
+    "@types/jest": "^30.0.0",
+    "@types/react": "^19.2.14",
+    "commitlint": "^20.5.0",
+    "del-cli": "^7.0.0",
+    "eslint": "^10.2.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "jest": "^30.3.0",
+    "prettier": "^3.8.3",
+    "react": "19.2.5",
+    "react-native": "0.85.2",
+    "react-native-builder-bob": "^0.41.0",
+    "release-it": "^20.0.0",
+    "typescript": "^6.0.3"
+  },
+  "resolutions": {
+    "@types/react": "^18.2.44"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
+  "overrides": {
+    "@react-native/eslint-config": {
+      "eslint": "^10.2.1"
+    },
+    "@release-it/conventional-changelog": {
+      "release-it": "^20.0.0"
+    },
+    "lottie-react-native": {
+      "@lottiefiles/dotlottie-react": "^0.19.0"
+    }
+  },
+  "packageManager": "yarn@3.6.1",
+  "jest": {
+    "preset": "react-native",
+    "modulePathIgnorePatterns": [
+      "<rootDir>/lib/"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release ${version}",
+      "tagName": "v${version}"
+    },
+    "npm": {
+      "publish": true
+    },
+    "github": {
+      "release": true
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "preset": "angular"
+      }
+    }
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "@react-native",
+      "prettier"
+    ],
+    "rules": {
+      "react/react-in-jsx-scope": "off",
+      "prettier/prettier": [
+        "error",
+        {
+          "quoteProps": "consistent",
+          "singleQuote": true,
+          "tabWidth": 2,
+          "trailingComma": "es5",
+          "useTabs": false
+        }
+      ]
+    }
+  },
+  "eslintIgnore": [
+    "node_modules/",
+    "lib/"
+  ],
+  "prettier": {
+    "quoteProps": "consistent",
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "es5",
+    "useTabs": false
+  },
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      "codegen",
+      [
+        "commonjs",
+        {
+          "esm": true
+        }
+      ],
+      [
+        "module",
+        {
+          "esm": true
+        }
+      ],
+      [
+        "typescript",
+        {
+          "project": "tsconfig.build.json"
+        }
+      ]
+    ]
+  },
+  "codegenConfig": {
+    "name": "MEDHIRARnOtpTextInputSpec",
+    "type": "modules",
+    "jsSrcsDir": "lib",
+    "outputDir": {
+      "ios": "ios/generated",
+      "android": "android/generated"
+    },
+    "android": {
+      "javaPackageName": "com.medhirarnotptextinput"
+    }
+  },
+  "create-react-native-library": {
+    "languages": "js",
+    "type": "library",
+    "version": "0.62.0"
+  }
+}

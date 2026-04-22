@@ -1,0 +1,52 @@
+site_name: MEDHIRA RN OTP TextInput
+site_url: https://medhira-rn-otp-textinput.readthedocs.io
+site_description: OTP/PIN text input component for React Native
+site_author: MEDHIRA
+docs_dir: docs
+
+repo_name: HELLOMEDHIRA/medhira-rn-otp-textInput
+repo_url: https://github.com/HELLOMEDHIRA/medhira-rn-otp-textInput
+
+theme:
+  name: material
+  logo: https://raw.githubusercontent.com/HELLOMEDHIRA/medhira/main/assets/medhira-logo.png
+  favicon: https://raw.githubusercontent.com/HELLOMEDHIRA/medhira/main/assets/medhira-logo.png
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    - scheme: default
+      primary: teal
+      accent: teal
+    - scheme: slate
+      primary: teal
+      accent: teal
+
+nav:
+  - Getting Started: index.md
+  - API: api.md
+  - Examples: examples.md
+  - About: about.md
+
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
+  - tables
+  - fenced_code
+  - attr_list
+
+plugins:
+  - search:
+      lang: en
+  - minify:
+      minify_html: true
+      minify_js: true
+      minify_css: true
+      htmlmin_opts:
+        remove_comments: true
+      cache_safe: true
+
+copyright: |
+  &copy; 2024 MEDHIRA. All rights reserved.
