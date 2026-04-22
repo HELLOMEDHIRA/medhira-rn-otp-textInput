@@ -56,7 +56,7 @@ If you need help or have questions:
 
 - Email: [hello.medhira@gmail.com](mailto:hello.medhira@gmail.com)
 - GitHub Issues: [https://github.com/HELLOMEDHIRA/medhira-rn-otp-textInput/issues](https://github.com/HELLOMEDHIRA/medhira-rn-otp-textInput/issues)
-- LinkedIn: [@medhira](https://www.linkedin.com/company/medhira)
+- LinkedIn: [@medhira](https://www.linkedin.com/in/smuniharish)
 
 ## License
 

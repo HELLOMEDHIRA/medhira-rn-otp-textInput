@@ -163,7 +163,7 @@ Inspired by [react-native-otp-textinput](https://github.com/naveenvignesh5/react
 
 ## Sponsor & Support
 
-To keep this library maintained and up-to-date please consider [sponsoring it on GitHub](https://github.com/sponsors/medhira). Or if you are looking for a private support or help in customizing the experience, then reach out to us on LinkedIn [https://www.linkedin.com/in/smuniharish](https://www.linkedin.com/company/medhira).
+To keep this library maintained and up-to-date please consider [sponsoring it on GitHub](https://github.com/sponsors/smuniharish). Or if you are looking for a private support or help in customizing the experience, then reach out to us on LinkedIn [https://www.linkedin.com/in/smuniharish](https://www.linkedin.com/in/smuniharish).
 
 ## License
 
