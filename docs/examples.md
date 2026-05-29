@@ -13,19 +13,14 @@ const BasicExample = () => {
   return (
     <View style={styles.container}>
       <Text>Enter your OTP:</Text>
-      <OTPTextView
-        inputCount={4}
-        handleTextChange={setOtp}
-      />
+      <OTPTextView inputCount={6} handleTextChange={setOtp} />
       <Text>Entered: {otp}</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-  },
+  container: { padding: 20 },
 });
 ```
 
@@ -33,7 +28,7 @@ const styles = StyleSheet.create({
 
 ```tsx
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { OTPTextView } from 'medhira-rn-otp-textinput';
 
 const StyledExample = () => {
@@ -41,13 +36,14 @@ const StyledExample = () => {
 
   return (
     <OTPTextView
-      defaultValue="1234"
+      defaultValue=""
       inputCount={6}
-      tintColor="#3CB371"
-      offTintColor="#DCDCDC"
+      tintColor="#2563EB"
+      offTintColor="#E5E7EB"
       containerStyle={styles.container}
       textInputStyle={styles.input}
       handleTextChange={setOtp}
+      autoFocus
     />
   );
 };
@@ -59,10 +55,11 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   input: {
-    borderRadius: 10,
-    borderWidth: 1,
-    width: 45,
-    height: 45,
+    borderRadius: 12,
+    borderWidth: 2,
+    width: 48,
+    height: 56,
+    fontSize: 24,
   },
 });
 ```
@@ -82,7 +79,7 @@ const AlphaNumericExample = () => {
       <Text>Enter Code:</Text>
       <OTPTextView
         inputCount={8}
-        inputCellLength={2}
+        inputCellLength={1}
         keyboardType="default"
         handleTextChange={setCode}
       />
@@ -94,21 +91,21 @@ const AlphaNumericExample = () => {
 ## With Ref (Using Hooks)
 
 ```tsx
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { View, Button } from 'react-native';
-import { OTPTextView, OTPTextViewType } from 'medhira-rn-otp-textinput';
+import { OTPTextView, type OTPTextViewRef } from 'medhira-rn-otp-textinput';
 
 const RefExample = () => {
-  const inputRef = useRef<OTPTextViewType>(null);
-
-  const clearText = () => {
-    inputRef.current?.clear();
-  };
+  const inputRef = useRef<OTPTextViewRef>(null);
 
   return (
     <View>
-      <OTPTextView ref={inputRef} inputCount={4} />
-      <Button title="Clear" onPress={clearText} />
+      <OTPTextView ref={inputRef} inputCount={6} handleTextChange={() => {}} />
+      <Button title="Clear" onPress={() => inputRef.current?.clear()} />
+      <Button
+        title="Set demo OTP"
+        onPress={() => inputRef.current?.setValue('123456')}
+      />
     </View>
   );
 };
@@ -128,8 +125,8 @@ const AutoFocusExample = () => {
     <View>
       <Text>Auto-focus enabled:</Text>
       <OTPTextView
-        inputCount={4}
-        autoFocus={true}
+        inputCount={6}
+        autoFocus
         handleTextChange={setOtp}
       />
     </View>
@@ -141,7 +138,7 @@ const AutoFocusExample = () => {
 
 ```tsx
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { OTPTextView } from 'medhira-rn-otp-textinput';
 
 const MultiColorExample = () => {
@@ -159,6 +156,27 @@ const MultiColorExample = () => {
         handleTextChange={setOtp}
       />
     </View>
+  );
+};
+```
+
+## Secure PIN Entry
+
+```tsx
+import React, { useState } from 'react';
+import { OTPTextView } from 'medhira-rn-otp-textinput';
+
+const PinExample = () => {
+  const [pin, setPin] = useState('');
+
+  return (
+    <OTPTextView
+      inputCount={4}
+      keyboardType="number-pad"
+      secureTextEntry
+      handleTextChange={setPin}
+      accessibilityLabel="PIN digit"
+    />
   );
 };
 ```

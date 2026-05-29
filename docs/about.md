@@ -4,67 +4,57 @@
 
 **Engineering Intelligence Across Everything**
 
-MEDHIRA is a technology company focused on building intelligent solutions across multiple platforms. We develop and maintain open-source libraries and frameworks for the developer community.
+MEDHIRA builds and maintains open-source libraries for the developer community with a focus on quality, documentation, and developer experience.
 
 ### Our Mission
 
-To provide high-quality, well-documented libraries that make developers' lives easier. We believe in:
-
 - Clean, maintainable code
 - Comprehensive documentation
-- Breaking barriers in development
 - Community-driven growth
+- Reliable, well-tested packages
 
-## medhira-rn-otp-textInput
+## medhira-rn-otp-textinput
 
-A React Native OTP/PIN text input component that provides a seamless way to collect one-time passwords and PIN codes in mobile applications.
+A React Native OTP/PIN text input component for collecting one-time passwords and security codes in mobile applications.
 
-### Features
+### Use Cases
 
-- Customizable number of input cells
-- Individual cell focus management
-- Support for both numeric and alphanumeric input
-- Custom styling options
-- Auto-focus capability
-- Test ID support for testing
+- Authentication and login flows
+- Phone number verification
+- Payment confirmations
+- Security PIN entry
 
 ### Why This Library?
 
-Collecting OTP or PIN codes is a common requirement in mobile applications, especially for:
-
-- Authentication flows
-- Phone number verification
-- Payment confirmations
-- Security codes
-
-This library provides a clean, customizable solution that works out of the box with minimal configuration.
+Collecting OTP or PIN codes is a common mobile requirement. This library provides a customizable, typed, zero-native-code solution that works with both Expo and bare React Native projects.
 
 ## Contributing
 
-We welcome contributions from the community! Whether you've found a bug, have a feature request, or want to contribute code, please check out our [GitHub repository](https://github.com/HELLOMEDHIRA/medhira-rn-otp-textInput).
+We welcome contributions! Visit the [GitHub repository](https://github.com/HELLOMEDHIRA/medhira-rn-otp-textInput).
 
 ### Development Setup
 
-1. Clone the repository
-2. Install dependencies: `npm install`
-3. Run tests: `npm test`
-4. Build: `npm run prepare`
+```sh
+git clone https://github.com/HELLOMEDHIRA/medhira-rn-otp-textInput.git
+cd medhira-rn-otp-textInput
+npm install
+npm test
+npm run prepare
+```
 
 ## Support
 
-If you need help or have questions:
-
 - Email: [hello.medhira@gmail.com](mailto:hello.medhira@gmail.com)
-- GitHub Issues: [https://github.com/HELLOMEDHIRA/medhira-rn-otp-textInput/issues](https://github.com/HELLOMEDHIRA/medhira-rn-otp-textInput/issues)
-- LinkedIn: [@medhira](https://www.linkedin.com/in/smuniharish)
+- GitHub Issues: [github.com/HELLOMEDHIRA/medhira-rn-otp-textInput/issues](https://github.com/HELLOMEDHIRA/medhira-rn-otp-textInput/issues)
+- LinkedIn: [@smuniharish](https://www.linkedin.com/in/smuniharish)
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+MIT — see [LICENSE](./LICENSE).
 
 ## Acknowledgments
 
-Inspired by [react-native-otp-textinput](https://github.com/navevvignesh5/react-native-otp-textinput) by naveenvignesh5.
+Inspired by [react-native-otp-textinput](https://github.com/naveenvignesh5/react-native-otp-textinput) by naveenvignesh5.
 
 ---
 

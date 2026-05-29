@@ -140,3 +140,6 @@ vite.config.ts.timestamp-*
 
 android/
 ios/
+site/
+.vscode/
+**/*.map

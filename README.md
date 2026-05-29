@@ -1,14 +1,35 @@
-# medhira-rn-otp-textInput
+<div align="center">
 
-MEDHIRA - OTP/PIN text input component for React Native
+# medhira-rn-otp-textinput
 
-![medhira](https://raw.githubusercontent.com/HELLOMEDHIRA/medhira/main/assets/medhira-logo.png)
+**A polished, customizable OTP / PIN input for React Native**
 
-**Engineering Intelligence Across Everything**
+[![npm version](https://img.shields.io/npm/v/medhira-rn-otp-textinput?style=for-the-badge&logo=npm&color=CB3837)](https://www.npmjs.com/package/medhira-rn-otp-textinput)
+[![npm downloads](https://img.shields.io/npm/dm/medhira-rn-otp-textinput?style=for-the-badge&logo=npm&color=CB3837)](https://www.npmjs.com/package/medhira-rn-otp-textinput)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](./LICENSE)
+[![React Native](https://img.shields.io/badge/React%20Native-0.73%2B-61DAFB?style=for-the-badge&logo=react)](https://reactnative.dev)
+[![Documentation](https://img.shields.io/badge/Docs-ReadTheDocs-8CA1AF?style=for-the-badge&logo=readthedocs)](https://medhira-rn-otp-textinput.readthedocs.io)
 
-[![npm package](https://img.shields.io/npm/v/medhira-rn-otp-textinput.svg)](https://www.npmjs.com/package/medhira-rn-otp-textinput)
-[![npm downloads](https://img.shields.io/npm/dm/medhira-rn-otp-textinput.svg)](https://www.npmjs.com/package/medhira-rn-otp-textinput)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+<img src="https://raw.githubusercontent.com/HELLOMEDHIRA/medhira/main/assets/medhira-logo.png" alt="MEDHIRA" width="120" />
+
+*Engineering Intelligence Across Everything*
+
+</div>
+
+---
+
+Collect one-time passwords and PIN codes with a lightweight, fully typed React Native component. Built for authentication flows, phone verification, and secure code entry — with focus management, paste support, and ref-based control out of the box.
+
+## Features
+
+- **Flexible cell count** — configure 4, 6, or any number of OTP digits
+- **Smart focus navigation** — auto-advance, backspace handling, paste distribution
+- **Ref API** — `clear()`, `setValue()`, and `focus()` via imperative handle
+- **Custom styling** — per-cell or global tint / off-tint colors
+- **Keyboard-aware validation** — numeric-only or alphanumeric modes
+- **TypeScript first** — exported props and ref types
+- **Test-friendly** — configurable `testIDPrefix` on every cell
+- **Zero native code** — pure JS, works with Expo and bare React Native
 
 ## Installation
 
@@ -17,158 +38,210 @@ MEDHIRA - OTP/PIN text input component for React Native
 npx expo install medhira-rn-otp-textinput
 
 # React Native
-npm install --save medhira-rn-otp-textinput
+npm install medhira-rn-otp-textinput
+```
+
+## Quick Start
+
+```tsx
+import React, { useState } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { OTPTextView } from 'medhira-rn-otp-textinput';
+
+export default function App() {
+  const [otp, setOtp] = useState('');
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.label}>Enter verification code</Text>
+      <OTPTextView inputCount={6} handleTextChange={setOtp} />
+      <Text style={styles.hint}>Entered: {otp || '—'}</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { padding: 24 },
+  label: { fontSize: 16, marginBottom: 12 },
+  hint: { marginTop: 16, color: '#666' },
+});
+```
+
+## Architecture
+
+```mermaid
+flowchart TB
+    subgraph Consumer["Your App"]
+        State["OTP state"]
+        Ref["OTPTextViewRef"]
+    end
+
+    subgraph Component["OTPTextView"]
+        Cells["TextInput cells × N"]
+        Focus["Focus manager"]
+        Validate["Input validator"]
+        Paste["Paste handler"]
+    end
+
+    State -->|"handleTextChange"| Component
+    Ref -->|"clear / setValue / focus"| Component
+    Component --> Cells
+    Cells --> Focus
+    Cells --> Validate
+    Cells --> Paste
+    Paste -->|"distributes digits"| Cells
 ```
 
 ## Props
 
-The Following Props are applicable for the component along with **props supported by react native `TextInput` component**
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `defaultValue` | `string` | `''` | Initial OTP value |
+| `inputCount` | `number` | `4` | Number of input cells |
+| `inputCellLength` | `number` | `1` | Characters allowed per cell |
+| `tintColor` | `string \| string[]` | `#3CB371` | Border color when focused |
+| `offTintColor` | `string \| string[]` | `#DCDCDC` | Border color when unfocused |
+| `handleTextChange` | `(text: string) => void` | — | Called with the full OTP string |
+| `handleCellTextChange` | `(text: string, index: number) => void` | — | Called per cell change |
+| `keyboardType` | `KeyboardType` | `numeric` | React Native keyboard type |
+| `containerStyle` | `ViewStyle` | `{}` | Container style |
+| `textInputStyle` | `ViewStyle` | `{}` | Per-cell input style |
+| `testIDPrefix` | `string` | `otp_input_` | Prefix for cell test IDs |
+| `autoFocus` | `boolean` | `false` | Focus first cell on mount |
+| `editable` | `boolean` | — | Forwarded to each `TextInput` |
+| `secureTextEntry` | `boolean` | — | Mask cell values |
+| `accessibilityLabel` | `string` | — | Base label (appended with cell index) |
 
-| Prop                 | Type   | Optional | Default      | Description                                                                            |
-| -------------------- | ------ | -------- | ------------ | -------------------------------------------------------------------------------------- |
-| defaultValue         | string | Yes      | ''           | Default Value that can be set based on OTP / Pin received from parent container.       |
-| handleTextChange     | func   | No       | n/a          | callback with concated string of all cells as argument.                                |
-| handleCellTextChange | func   | Yes      | n/a          | callback for text change in individual cell with cell text and cell index as arguments |
-| inputCount           | number | Yes      | 4            | Number of Text Input Cells to be present.                                              |
-| tintColor            | string | Yes      | #3CB371      | Color for Cell Border on being focused.                                                |
-| offTintColor         | string | Yes      | #DCDCDC      | Color for Cell Border Border not focused.                                              |
-| inputCellLength      | number | Yes      | 1            | Number of character that can be entered inside a single cell.                          |
-| containerStyle       | object | Yes      | {}           | style for overall container.                                                           |
-| textInputStyle       | object | Yes      | {}           | style for text input.                                                                  |
-| testIDPrefix         | string | Yes      | 'otp_input_' | testID prefix, the result will be `otp_input_0` until inputCount                       |
-| autoFocus            | bool   | Yes      | false        | Input should automatically get focus when the components loads                         |
+See the [full API reference](https://medhira-rn-otp-textinput.readthedocs.io/en/latest/api/) for all supported props.
 
-## Helper Functions
+## Ref Methods
 
-Clearing and Setting values to component
-
-```js
-// using traditional ref
-clearText = () => {
-    this.otpInput.clear();
-}
-
-setText = () => {
-    this.otpInput.setValue("1234");
-}
-
-render() {
-    return (
-        <View>
-            <OTPTextInput ref={e => (this.otpInput = e)} >
-            <Button title="clear" onClick={this.clearText}>
-        </View>
-    );
-}
-
-
-```
-
-```js
-// hooks
+```tsx
 import React, { useRef } from 'react';
+import { Button, View } from 'react-native';
+import {
+  OTPTextView,
+  type OTPTextViewRef,
+} from 'medhira-rn-otp-textinput';
 
-const ParentComponent = () => {
-    let otpInput = useRef(null);
+export default function OtpWithRef() {
+  const otpRef = useRef<OTPTextViewRef>(null);
 
-    const clearText = () => {
-        otpInput.current.clear();
-    }
-
-    const setText = () => {
-        otpInput.current.setValue("1234");
-    }
-
-    return (
-        <View>
-            <OTPTextView ref={e => (otpInput = e)} >
-            <Button title="clear" onClick={clearText}>
-        </View>
-    );
+  return (
+    <View>
+      <OTPTextView ref={otpRef} inputCount={6} />
+      <Button title="Clear" onPress={() => otpRef.current?.clear()} />
+      <Button
+        title="Fill demo code"
+        onPress={() => otpRef.current?.setValue('123456')}
+      />
+    </View>
+  );
 }
-
 ```
 
-## Example
+| Method | Signature | Description |
+|--------|-----------|-------------|
+| `clear` | `() => void` | Clears all cells and focuses the first |
+| `setValue` | `(value: string, isPaste?: boolean) => void` | Sets OTP from a string |
+| `focus` | `() => void` | Focuses the first cell |
 
-```js
+## Styled Example
 
-import React, { useRef, useState } from 'react'
-import { OtpTextInput, StyleSheet } from '@/imports';
-import { useTheme } from '@/hooks';
-import { heightPercent, widthPercent } from '@/helpers/functions/responsive';
-import { debugLog } from '@/config/logsConfig';
-import {OTPTextView, OTPTextViewType} from 'medhira-rn-otp-textinput';
+```tsx
+import React, { useState } from 'react';
+import { StyleSheet } from 'react-native';
+import { OTPTextView } from 'medhira-rn-otp-textinput';
 
-const OtpInput = () => {
+export default function StyledOtp() {
+  const [otp, setOtp] = useState('');
 
-  const theme = useTheme();
-  const { colors, fontSizes, iconSizes } = theme
-
-  const styles = StyleSheet.create({
-    textInputContainer: {
-      marginVertical: 15,
-      justifyContent:'center',
-      padding:widthPercent(0.3)
-    },
-    roundedTextInput: {
-      borderRadius: 10,
-      borderWidth: 1,
-      width:widthPercent(6),
-      height:heightPercent(6),
-      margin:widthPercent(0.2)
-    },
-  })
-
-  const [otpInput, setOtpInput] = useState<string>("");
-  const input = useRef<OTPTextViewType>(null);
-  const handleCellTextChange = async (text: string, i: number) => {
-    debugLog('handleCellTextChange')
-  };
   return (
     <OTPTextView
-      handleCellTextChange={handleCellTextChange}
-      handleTextChange={setOtpInput}
       inputCount={6}
-      keyboardType="numeric"
-      containerStyle={styles.textInputContainer}
-      textInputStyle={styles.roundedTextInput}
-      tintColor={colors.text}
+      handleTextChange={setOtp}
+      tintColor="#2563EB"
+      offTintColor="#E5E7EB"
+      containerStyle={styles.container}
+      textInputStyle={styles.cell}
+      autoFocus
     />
   );
-
 }
 
-export default OtpInput
-
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    gap: 8,
+  },
+  cell: {
+    borderRadius: 12,
+    borderWidth: 2,
+    width: 48,
+    height: 56,
+    fontSize: 24,
+  },
+});
 ```
 
-And we're done
+## Input Flow
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Cell as TextInput Cell
+    participant OTP as OTPTextView
+    participant App as Parent
+
+    User->>Cell: Type / Paste
+    Cell->>OTP: onChangeText
+    OTP->>OTP: Validate input
+    alt Paste (multi-char)
+        OTP->>OTP: Distribute across cells
+    else Single character
+        OTP->>OTP: Update cell state
+    end
+    OTP->>App: handleTextChange(full OTP)
+    OTP->>Cell: Auto-focus next cell
+```
+
+## Requirements
+
+- React 18+
+- React Native 0.73+
+- Works with Expo and bare React Native
+
+## Documentation
+
+Full docs are available on [ReadTheDocs](https://medhira-rn-otp-textinput.readthedocs.io):
+
+- [Getting Started](https://medhira-rn-otp-textinput.readthedocs.io/en/latest/)
+- [API Reference](https://medhira-rn-otp-textinput.readthedocs.io/en/latest/api/)
+- [Examples](https://medhira-rn-otp-textinput.readthedocs.io/en/latest/examples/)
+- [Architecture](https://medhira-rn-otp-textinput.readthedocs.io/en/latest/architecture/)
 
 ## Contributing
 
-Contribution are always welcome, no matter how large or small !
+Contributions are welcome! Please open an issue or pull request on [GitHub](https://github.com/HELLOMEDHIRA/medhira-rn-otp-textInput).
 
-We want this community to be friendly and respectful to each other. Please follow it in all your interactions with the project.
+```sh
+git clone https://github.com/HELLOMEDHIRA/medhira-rn-otp-textInput.git
+cd medhira-rn-otp-textInput
+npm install
+npm test
+npm run prepare
+```
 
-Please feel free to drop us an email at [MEDHIRA](mailto:hello.medhira@gmail.com?subject=[GitHub])
+Questions? Email [hello.medhira@gmail.com](mailto:hello.medhira@gmail.com?subject=medhira-rn-otp-textinput).
 
 ## Acknowledgements
 
-Thanks to the authors of these libraries for inspiration
-
-## Note
-
-Inspired by [react-native-otp-textinput](https://github.com/naveenvignesh5/react-native-otp-textinput#readme)
+Inspired by [react-native-otp-textinput](https://github.com/naveenvignesh5/react-native-otp-textinput) by naveenvignesh5.
 
 ## Sponsor & Support
 
-To keep this library maintained and up-to-date please consider [sponsoring it on GitHub](https://github.com/sponsors/smuniharish). Or if you are looking for a private support or help in customizing the experience, then reach out to us on LinkedIn [https://www.linkedin.com/in/smuniharish](https://www.linkedin.com/in/smuniharish).
+To keep this library maintained, consider [sponsoring on GitHub](https://github.com/sponsors/smuniharish). For private support or customization, reach out on [LinkedIn](https://www.linkedin.com/in/smuniharish).
 
 ## License
 
-[MIT](./LICENSE)
-
----
-
-Made with love by [MEDHIRA](https://medhira.readthedocs.io/en/latest/)
+[MIT](./LICENSE) — Made with love by [MEDHIRA](https://medhira.readthedocs.io/en/latest/)

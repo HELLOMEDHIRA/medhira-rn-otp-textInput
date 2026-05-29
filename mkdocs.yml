@@ -20,17 +20,26 @@ theme:
     - scheme: slate
       primary: teal
       accent: teal
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - content.code.copy
 
 nav:
   - Getting Started: index.md
   - API: api.md
   - Examples: examples.md
+  - Architecture: architecture.md
   - About: about.md
 
 markdown_extensions:
   - admonition
-  - codehilite:
-      guess_lang: false
+  - pymdownx.highlight
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - toc:
       permalink: true
   - tables
@@ -48,5 +57,8 @@ plugins:
         remove_comments: true
       cache_safe: true
 
+extra_javascript:
+  - https://unpkg.com/mermaid@11/dist/mermaid.min.js
+
 copyright: |
-  &copy; 2024 MEDHIRA. All rights reserved.
+  &copy; 2024–2026 MEDHIRA. All rights reserved.

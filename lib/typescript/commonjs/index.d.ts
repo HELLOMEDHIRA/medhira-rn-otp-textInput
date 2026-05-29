@@ -1,6 +1,6 @@
-import React from 'react';
-import { type ViewStyle, type KeyboardType } from 'react-native';
-interface OTPTextViewProps {
+import { type ViewStyle, type KeyboardType, type TextInputProps } from 'react-native';
+type OTPTextInputProps = Pick<TextInputProps, 'editable' | 'accessibilityLabel' | 'accessibilityHint' | 'autoComplete' | 'importantForAutofill' | 'textContentType' | 'secureTextEntry' | 'placeholder' | 'placeholderTextColor'>;
+export interface OTPTextViewProps extends OTPTextInputProps {
     defaultValue?: string;
     inputCount?: number;
     containerStyle?: ViewStyle;
@@ -14,7 +14,12 @@ interface OTPTextViewProps {
     testIDPrefix?: string;
     autoFocus?: boolean;
 }
-declare const OTPTextView: React.FC<OTPTextViewProps>;
-declare const OTPTextViewType: "string" | "number" | "bigint" | "boolean" | "symbol" | "undefined" | "object" | "function";
-export { OTPTextView, OTPTextViewType };
-//# sourceMappingURL=index.d.ts.map
+export interface OTPTextViewRef {
+    clear: () => void;
+    setValue: (value: string, isPaste?: boolean) => void;
+    focus: () => void;
+}
+/** @deprecated Use {@link OTPTextViewRef} instead */
+export type OTPTextViewType = OTPTextViewRef;
+declare const OTPTextView: import("react").ForwardRefExoticComponent<OTPTextViewProps & import("react").RefAttributes<OTPTextViewRef>>;
+export { OTPTextView };
